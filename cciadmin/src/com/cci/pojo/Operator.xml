@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Operator">
+
+	<typeAlias alias="Operator" type="com.cci.pojo.Operator" />
+	<typeAlias alias="PageUtil" type="com.cci.pojo.PageUtil" />
+
+	<select id="getOperatorCounts" resultClass="int"
+		parameterClass="PageUtil">
+		<![CDATA[   
+            SELECT    count(*)   FROM     operator  t   where      $sqlWhere$   and  del_flag=0
+        ]]>
+	</select>
+
+	<select id="selectOperator" parameterClass="PageUtil"
+		resultClass="Operator">
+		<![CDATA[	    
+	    select   *  from   operator  where    $sqlWhere$   and   del_flag=0   limit #beginElement#,#pageSize#
+	    ]]>
+	</select>
+
+	<insert id="insertOperator" parameterClass="Operator">
+		insert into
+		operator(operator_name,operator_code,operator_pwd,telephone,address,department,del_flag,action,comments,querylog)
+		values(#operator_name#,#operator_code#,#operator_pwd#,#telephone#,#address#,#department#,#del_flag#,#action#,#comments#,#querylog#)
+	</insert>
+
+
+	<select id="queryOperatorById" parameterClass="int"
+		resultClass="Operator">
+		select
+		operator_id,operator_name,operator_code,operator_pwd,telephone,address,department,del_flag,action,comments,querylog
+		from operator where operator_id=#operator_id#
+
+	</select>
+
+
+	<update id="updateOperator" parameterClass="Operator">
+		update operator set
+		operator_name=#operator_name#,operator_code=#operator_code#,operator_pwd=#operator_pwd#,telephone=#telephone#,address=#address#,department=#department#,del_flag=#del_flag#,action=#action#,comments=#comments#,querylog=#querylog#
+		where operator_id=#operator_id#
+	</update>
+
+	<select id="queryOperatorByOperatorCode" parameterClass="String"
+		resultClass="int">
+		select count(operator_id) from operator where
+		operator_code=#operator_code# and del_flag=0
+	</select>
+
+
+	<update id="delOperator" parameterClass="int">
+		update operator set del_flag=1 where operator_id=#operator_id#
+		and del_flag=0
+	</update>
+
+
+</sqlMap>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="StationGroup">
+
+	<typeAlias alias="StationGroup" type="com.cci.pojo.StationGroup" />
+	<typeAlias alias="GroupFirst" type="com.cci.pojo.GroupFirst" />
+	<typeAlias alias="GroupSecond" type="com.cci.pojo.GroupSecond" />
+	<typeAlias alias="GroupThird" type="com.cci.pojo.GroupThird" />
+	<typeAlias alias="GroupFourth" type="com.cci.pojo.GroupFourth" />
+
+	<select id="getGroupFirstCounts" resultClass="int"
+		parameterClass="PageUtil">
+		<![CDATA[   
+            SELECT    count(*)   FROM     group_first      where      $sqlWhere$   
+        ]]>
+	</select>
+
+	<select id="selectGroupFirst" parameterClass="PageUtil"
+		resultClass="GroupFirst">
+		<![CDATA[	    
+	    select     *    from     group_first    where    $sqlWhere$       limit   #beginElement#,#pageSize#
+	    ]]>
+	</select>
+
+
+	<select id="getGroupSecondCounts" resultClass="int"
+		parameterClass="PageUtil">
+		<![CDATA[   
+            SELECT    count(*)   FROM     group_second_view      where      $sqlWhere$   
+        ]]>
+	</select>
+
+	<select id="selectGroupSecond" parameterClass="PageUtil"
+		resultClass="GroupSecond">
+		<![CDATA[	    
+	    select     *    from     group_second_view    where    $sqlWhere$       limit   #beginElement#,#pageSize#
+	    ]]>
+	</select>
+
+
+	<select id="getGroupThirdCounts" resultClass="int"
+		parameterClass="PageUtil">
+		<![CDATA[   
+            SELECT    count(*)   FROM     group_third_view      where      $sqlWhere$   
+        ]]>
+	</select>
+
+	<select id="selectGroupThird" parameterClass="PageUtil"
+		resultClass="GroupThird">
+		<![CDATA[	    
+	    select     *    from     group_third_view    where    $sqlWhere$       limit   #beginElement#,#pageSize#
+	    ]]>
+	</select>
+
+
+	<select id="getGroupFourthCounts" resultClass="int"
+		parameterClass="PageUtil">
+		<![CDATA[   
+            SELECT    count(*)   FROM     group_fourth_view      where      $sqlWhere$   
+        ]]>
+	</select>
+
+	<select id="selectGroupFourth" parameterClass="PageUtil"
+		resultClass="GroupFourth">
+		<![CDATA[	    
+	    select     *    from     group_fourth_view    where    $sqlWhere$       limit   #beginElement#,#pageSize#
+	    ]]>
+	</select>
+
+	<insert id="insertStationGroup" parameterClass="StationGroup">
+		insert into
+		station_group(group_id,group_name,parent_id,del_flag,demo)
+		values(#group_id#,#group_name#,#parent_id#,#del_flag#,#demo#)
+
+		<selectKey resultClass="int" keyProperty="group_id">
+			select last_insert_id() as group_id
+		</selectKey>
+
+	</insert>
+
+	<insert id="insertGroupFirst" parameterClass="GroupFirst">
+		insert into group_first(group_id,group_name)
+		values(#group_id#,#group_name#)
+	</insert>
+
+	<insert id="insertGroupSecond" parameterClass="GroupSecond">
+		insert into group_second(group_id,group_name,first_id)
+		values(#group_id#,#group_name#,#first_id#)
+	</insert>
+
+	<insert id="insertGroupThird" parameterClass="GroupThird">
+		insert into group_third(group_id,group_name,first_id,second_id)
+		values(#group_id#,#group_name#,#first_id#,#second_id#)
+	</insert>
+
+	<insert id="insertGroupFourth" parameterClass="GroupFourth">
+		insert into
+		group_fourth(group_id,group_name,first_id,second_id,third_id)
+		values(#group_id#,#group_name#,#first_id#,#second_id#,#third_id#)
+	</insert>
+
+
+</sqlMap>

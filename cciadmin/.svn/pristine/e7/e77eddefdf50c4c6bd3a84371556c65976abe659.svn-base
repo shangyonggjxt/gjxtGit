@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url"
+			value="jdbc:mysql://192.168.23.250:3306/cci">
+		</property>
+		<property name="username" value="cci"></property>
+		<property name="password" value="cci2014"></property>
+		<property name="maxActive" value="10"></property>
+		<property name="maxIdle" value="3"></property>
+		<property name="maxWait" value="500"></property>
+		<property name="testOnBorrow" value="true"></property>
+		<property name="testOnReturn" value="true"></property>
+		<property name="testWhileIdle" value="true"></property>
+		<property name="validationQuery" value="select 2"></property>
+		<property name="defaultAutoCommit" value="true"></property>
+	</bean>
+
+
+	<bean id="sqlMapClient"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation"
+			value="classpath:SqlMapConfig.xml" />
+	</bean>
+
+	<bean id="sqlMapClientTemplate"
+		class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClient"></property>
+	</bean>
+
+
+	<bean id="operatorDao" class="com.cci.dao.ibatis.OperatorDaoIbatis"
+		scope="prototype">
+		<property name="sqlMapClientTemplate">
+			<ref bean="sqlMapClientTemplate" />
+		</property>
+	</bean>
+
+	<bean id="sysmUserDao" class="com.cci.dao.ibatis.SysmUserDaoIbatis"
+		scope="prototype">
+		<property name="sqlMapClientTemplate">
+			<ref bean="sqlMapClientTemplate" />
+		</property>
+	</bean>
+
+	<bean id="stationDao" class="com.cci.dao.ibatis.StationDaoIbatis"
+		scope="prototype">
+		<property name="sqlMapClientTemplate">
+			<ref bean="sqlMapClientTemplate" />
+		</property>
+	</bean>
+
+
+	<bean id="stationGroupDao"
+		class="com.cci.dao.ibatis.StationGroupDaoIbatis" scope="prototype">
+		<property name="sqlMapClientTemplate">
+			<ref bean="sqlMapClientTemplate" />
+		</property>
+	</bean>
+
+
+	<bean id="baseStationDao"
+		class="com.cci.dao.ibatis.BaseStationDaoIbatis" scope="prototype">
+		<property name="sqlMapClientTemplate">
+			<ref bean="sqlMapClientTemplate" />
+		</property>
+	</bean>
+
+	<bean id="operatorGroupAssignDao"
+		class="com.cci.dao.ibatis.OperatorGroupAssignDaoIbatis"
+		scope="prototype">
+		<property name="sqlMapClientTemplate">
+			<ref bean="sqlMapClientTemplate" />
+		</property>
+	</bean>
+
+
+	<bean id="userLogin" class="com.cci.action.LoginAction"
+		scope="prototype">
+		<property name="sysmUserDao">
+			<ref bean="sysmUserDao" />
+		</property>
+
+	</bean>
+
+	<bean id="operator" class="com.cci.action.OperatorAction"
+		scope="prototype">
+		<property name="operatorDao">
+			<ref bean="operatorDao" />
+		</property>
+	</bean>
+
+	<bean id="station" class="com.cci.action.StationAction"
+		scope="prototype">
+		<property name="stationDao">
+			<ref bean="stationDao" />
+		</property>
+		<property name="baseStationDao">
+			<ref bean="baseStationDao" />
+		</property>
+	</bean>
+
+	<bean id="stationGroup" class="com.cci.action.StationGroupAction"
+		scope="prototype">
+		<property name="stationGroupDao">
+			<ref bean="stationGroupDao" />
+		</property>
+		<property name="baseStationDao">
+			<ref bean="baseStationDao" />
+		</property>
+	</bean>
+
+	<bean id="baseStation" class="com.cci.action.BaseStationAction"
+		scope="prototype">
+		<property name="stationGroupDao">
+			<ref bean="stationGroupDao" />
+		</property>
+		<property name="baseStationDao">
+			<ref bean="baseStationDao" />
+		</property>
+	</bean>
+
+
+
+</beans>

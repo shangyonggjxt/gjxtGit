@@ -1,0 +1,31 @@
+package com.cci.dao;
+
+import java.util.List;
+
+import com.cci.pojo.BaseStation;
+
+public interface BaseStationDao {
+
+	/** ******分页查询********* */
+
+	public int getTotalPage();
+
+	public int getCurrentPage();
+
+	public int getTotalElements();
+
+	public List selectBaseStation(int pageSize, int currentPage, String sqlWhere);
+
+	public int insertBaseStation(BaseStation baseStation);
+
+	public List queryBaseStation();
+
+	public BaseStation queryBaseStationByID(int basestation_id);
+
+	public void updateBaseStation(BaseStation baseStation);
+
+	public void delBaseStation(int basestation_id);
+
+	public int queryBaseStationByGroupId(int group_id);
+
+}

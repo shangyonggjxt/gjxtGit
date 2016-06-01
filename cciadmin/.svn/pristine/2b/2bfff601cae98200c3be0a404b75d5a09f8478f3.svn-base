@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="default" extends="struts-default">
+
+		<global-results>
+			<result name="error" type="redirect">/Redirect.jsp</result>
+		</global-results>
+
+		<action name="userLogin" class="userLogin">
+			<result name="success">/Frameset.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="operator" class="operator">
+			<result name="query">/Operator/OperatorList.jsp</result>
+			<result name="operationSuc">/success.jsp</result>
+			<result name="preSave">/Operator/AddOperator.jsp</result>
+			<result name="input">/Operator/AddOperator.jsp</result>
+			<result name="view">/Operator/QueryOperator.jsp</result>
+			<result name="update_view">
+				/Operator/EditOperator.jsp
+			</result>
+		</action>
+
+
+		<action name="station" class="station">
+			<result name="query">/Station/StationList.jsp</result>
+			<result name="operationSuc">/success.jsp</result>
+			<result name="preSave">/Station/AddStation.jsp</result>
+			<result name="input">/Station/AddStation.jsp</result>
+			<result name="view">/Station/QueryStation.jsp</result>
+			<result name="update_view">/Station/EditStation.jsp</result>
+		</action>
+
+		<action name="stationGroup" class="stationGroup">
+			<result name="groupFirst">
+				/StationGroup/StationGroupFirstList.jsp
+			</result>
+			<result name="preSaveFirst">
+				/StationGroup/AddGroupFirst.jsp
+			</result>
+			<result name="groupSecond">
+				/StationGroup/StationGroupSecondList.jsp
+			</result>
+			<result name="preSaveSecond">
+				/StationGroup/AddGroupSecond.jsp
+			</result>
+			<result name="groupThird">
+				/StationGroup/StationGroupThirdList.jsp
+			</result>
+			<result name="preSaveThird">
+				/StationGroup/AddGroupThird.jsp
+			</result>
+			<result name="groupFourth">
+				/StationGroup/StationGroupFourthList.jsp
+			</result>
+			<result name="preSaveFourth">
+				/StationGroup/AddGroupFourth.jsp
+			</result>
+			<result name="operationSuc">/success.jsp</result>
+		</action>
+
+
+	</package>
+</struts>

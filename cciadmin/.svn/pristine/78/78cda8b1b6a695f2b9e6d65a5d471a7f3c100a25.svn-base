@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SysmUser">
+
+	<typeAlias alias="SysmUser" type="com.cci.pojo.SysmUser" />
+
+	<select id="querySysmUser" parameterClass="SysmUser"
+		resultClass="SysmUser">
+		select * from sysm_user where username=#username# and
+		password=#password# and delete_flag=0
+	</select>
+
+
+	<select id="getSysmUserCounts" resultClass="int"
+		parameterClass="PageUtil">
+		<![CDATA[   
+            SELECT    count(*)   FROM     sysm_user  t   where      $sqlWhere$   and  delete_flag=0
+        ]]>
+	</select>
+
+	<select id="selectSysmUser" parameterClass="PageUtil"
+		resultClass="Operator">
+		<![CDATA[
+	    select a.*  from (select t.*,rownum as rn from  sysm_user  t where rownum<=#endElement#     and   $sqlWhere$ and delete_flag=0) a where rn>#beginElement#
+	    ]]>
+	</select>
+
+
+</sqlMap>

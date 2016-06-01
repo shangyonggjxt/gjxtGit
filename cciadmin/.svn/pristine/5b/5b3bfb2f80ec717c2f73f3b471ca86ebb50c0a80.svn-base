@@ -1,0 +1,266 @@
+package com.cci.action;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.cci.dao.StationGroupDao;
+import com.cci.pojo.GroupFirst;
+import com.cci.pojo.GroupFourth;
+import com.cci.pojo.GroupSecond;
+import com.cci.pojo.GroupThird;
+import com.cci.pojo.PageSize;
+
+public class StationGroupAction extends BaseAction {
+
+	private String functionName;
+	private int pageSize = PageSize.pageSize;
+	private int currentPage = 1;
+	private int totalPage;
+	private int totalElements;
+
+	private GroupFirst groupFirst;
+	private GroupSecond groupSecond;
+	private GroupThird groupThird;
+	private GroupFourth groupFourth;
+	private StationGroupDao stationGroupDao;
+
+	private List list;
+
+	public String execute() throws Exception {
+
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpSession session = request.getSession();
+		Object userObject = session.getAttribute("sysmUser");
+
+		if (userObject == null) {
+			return this.ERROR;
+		}
+
+		if (functionName != null && functionName.equals("queryGroupFirst")) {
+
+			if (this.groupFirst == null) {
+				this.groupFirst = new GroupFirst();
+			}
+
+			String queryStr = "1=1";
+			StringBuilder stb = new StringBuilder(queryStr);
+
+			if (!(groupFirst.getGroup_name() == null || groupFirst
+					.getGroup_name().trim().equals(""))) {
+				stb.append(" and group_name  like  '%"
+						+ groupFirst.getGroup_name().trim() + "%'");
+			}
+
+			list = stationGroupDao.selectGroupFirst(pageSize, currentPage, stb
+					.toString());
+			this.currentPage = stationGroupDao.getCurrentPage();
+			this.totalElements = stationGroupDao.getTotalElements();
+			this.totalPage = stationGroupDao.getTotalPage();
+
+			return "groupFirst";
+
+		}
+
+		if (functionName != null && functionName.equals("insertGroupFirst")) {
+
+			stationGroupDao.insertGroupFirst(groupFirst);
+
+			return "operationSuc";
+
+		}
+
+		if (functionName != null && functionName.equals("insertGroupSecond")) {
+
+			stationGroupDao.insertGroupSecond(groupSecond);
+
+			return "operationSuc";
+
+		}
+
+		if (functionName != null && functionName.equals("insertGroupThird")) {
+
+			stationGroupDao.insertGroupThird(groupThird);
+
+			return "operationSuc";
+
+		}
+
+		if (functionName != null && functionName.equals("insertGroupFourth")) {
+
+			stationGroupDao.insertGroupFourth(groupFourth);
+
+			return "operationSuc";
+
+		}
+
+		if (functionName != null && functionName.equals("queryGroupSecond")) {
+
+			if (this.groupSecond == null) {
+				this.groupSecond = new GroupSecond();
+			}
+
+			String queryStr = "1=1";
+			StringBuilder stb = new StringBuilder(queryStr);
+
+			if (!(groupSecond.getGroup_name() == null || groupSecond
+					.getGroup_name().trim().equals(""))) {
+				stb.append(" and group_name  like  '%"
+						+ groupSecond.getGroup_name().trim() + "%'");
+			}
+
+			list = stationGroupDao.selectGroupSecond(pageSize, currentPage, stb
+					.toString());
+			this.currentPage = stationGroupDao.getCurrentPage();
+			this.totalElements = stationGroupDao.getTotalElements();
+			this.totalPage = stationGroupDao.getTotalPage();
+
+			return "groupSecond";
+
+		}
+
+		if (functionName != null && functionName.equals("queryGroupThird")) {
+
+			if (this.groupThird == null) {
+				this.groupThird = new GroupThird();
+			}
+
+			String queryStr = "1=1";
+			StringBuilder stb = new StringBuilder(queryStr);
+
+			if (!(groupThird.getGroup_name() == null || groupThird
+					.getGroup_name().trim().equals(""))) {
+				stb.append(" and group_name  like  '%"
+						+ groupThird.getGroup_name().trim() + "%'");
+			}
+
+			list = stationGroupDao.selectGroupThird(pageSize, currentPage, stb
+					.toString());
+			this.currentPage = stationGroupDao.getCurrentPage();
+			this.totalElements = stationGroupDao.getTotalElements();
+			this.totalPage = stationGroupDao.getTotalPage();
+
+			return "groupThird";
+
+		}
+
+		if (functionName != null && functionName.equals("queryGroupFourth")) {
+
+			if (this.groupFourth == null) {
+				this.groupFourth = new GroupFourth();
+			}
+
+			String queryStr = "1=1";
+			StringBuilder stb = new StringBuilder(queryStr);
+
+			if (!(groupFourth.getGroup_name() == null || groupFourth
+					.getGroup_name().trim().equals(""))) {
+				stb.append(" and group_name  like  '%"
+						+ groupFourth.getGroup_name().trim() + "%'");
+			}
+
+			list = stationGroupDao.selectGroupFourth(pageSize, currentPage, stb
+					.toString());
+			this.currentPage = stationGroupDao.getCurrentPage();
+			this.totalElements = stationGroupDao.getTotalElements();
+			this.totalPage = stationGroupDao.getTotalPage();
+
+			return "groupFourth";
+
+		}
+
+		return super.execute();
+	}
+
+	public String getFunctionName() {
+		return functionName;
+	}
+
+	public void setFunctionName(String functionName) {
+		this.functionName = functionName;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public int getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+
+	public int getTotalElements() {
+		return totalElements;
+	}
+
+	public void setTotalElements(int totalElements) {
+		this.totalElements = totalElements;
+	}
+
+	public List getList() {
+		return list;
+	}
+
+	public void setList(List list) {
+		this.list = list;
+	}
+
+	public GroupFirst getGroupFirst() {
+		return groupFirst;
+	}
+
+	public void setGroupFirst(GroupFirst groupFirst) {
+		this.groupFirst = groupFirst;
+	}
+
+	public StationGroupDao getStationGroupDao() {
+		return stationGroupDao;
+	}
+
+	public void setStationGroupDao(StationGroupDao stationGroupDao) {
+		this.stationGroupDao = stationGroupDao;
+	}
+
+	public GroupSecond getGroupSecond() {
+		return groupSecond;
+	}
+
+	public void setGroupSecond(GroupSecond groupSecond) {
+		this.groupSecond = groupSecond;
+	}
+
+	public GroupThird getGroupThird() {
+		return groupThird;
+	}
+
+	public void setGroupThird(GroupThird groupThird) {
+		this.groupThird = groupThird;
+	}
+
+	public GroupFourth getGroupFourth() {
+		return groupFourth;
+	}
+
+	public void setGroupFourth(GroupFourth groupFourth) {
+		this.groupFourth = groupFourth;
+	}
+
+}

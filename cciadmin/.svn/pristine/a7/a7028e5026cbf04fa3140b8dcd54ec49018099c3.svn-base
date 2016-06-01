@@ -1,0 +1,80 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+    <%@ taglib prefix="s" uri="/struts-tags"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>集中监控管理平台</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  
+  <script language="javascript">
+     
+			function submit_click(){
+				if(loginForm.username.value==""){
+					alert("你输入的用户无效。\r\n请检查用户名拼写，然后再试。");
+					loginForm.username.focus();
+					return;
+				}
+				loginForm.action=encodeURI("<%=request.getContextPath()%>/userLogin.action");
+				loginForm.submit();
+			}
+			
+			
+			function reSet(){
+			  loginForm.username.value="";
+			  loginForm.password.value="";
+			  loginForm.username.focus();
+			}
+  
+  </script>
+  
+  </head>
+  
+  <body onLoad="javascript:loginForm.username.focus();">
+  <s:form action="login.action" id="loginForm">
+  <table width="100%" border="1">
+  <tr>
+    <td colspan="4" align="center">用户登录</td>
+    </tr>
+  <tr>
+    <td width="406">&nbsp;</td>
+    <td width="128" align="right">用户名</td>
+    <td width="230"><label>
+      <input type="text" name="sysmUser.username" id="username">
+    </label></td>
+    <td width="599">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="406">&nbsp;</td>
+    <td width="128" align="right">密码</td>
+    <td width="230"><label>
+      <input type="password" name="sysmUser.password" id="password" onKeyDown="if(event.keyCode==13) submit_click()">
+    </label></td>
+    <td width="599">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="406">&nbsp;</td>
+    <td width="128" align="center">
+
+     <input type="button" name="Submit" value="重置" onClick="reSet()">    </td>
+    <td width="230" align="center">
+        <input type="button" name="Submit2" value="登录"  onClick="return submit_click()">    </td>
+    <td width="599">&nbsp;</td>
+  </tr>
+</table>
+
+</s:form>
+
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Station">
+
+	<typeAlias alias="Station" type="com.cci.pojo.Station" />
+
+	<select id="getStationCounts" resultClass="int"
+		parameterClass="PageUtil">
+		<![CDATA[   
+            SELECT    count(*)   FROM     station      where      $sqlWhere$   and  del_flag=0
+        ]]>
+	</select>
+
+	<select id="selectStation" parameterClass="PageUtil"
+		resultClass="Station">
+		<![CDATA[	    
+	    select     *    from     station    where    $sqlWhere$   and   del_flag=0    limit   #beginElement#,#pageSize#
+	    ]]>
+	</select>
+
+	<select id="queryNumByStationCode" parameterClass="Station"
+		resultClass="int">
+		select count(*) from station where station_code=#station_code#
+		and station_type=#station_type# and del_flag=0
+	</select>
+
+	<select id="queryStationByCode" parameterClass="Station"
+		resultClass="Station">
+		select
+		station_name,station_code,station_type,del_flag,address,department,demo
+		from station where station_code=#station_code# and
+		station_type=#station_type#
+	</select>
+
+	<update id="updateStation" parameterClass="Station">
+		update station set
+		station_name=#station_name#,station_code=#station_code#,station_type=#station_type#,del_flag=#del_flag#,address=#address#,department=#department#,demo=#demo#
+		where station_code=#station_code# and
+		station_type=#station_type#
+	</update>
+
+	<insert id="insertStation" parameterClass="Station">
+		insert into
+		station(station_name,station_code,station_type,del_flag,address,department,demo)
+		values(#station_name#,#station_code#,#station_type#,#del_flag#,#address#,#department#,#demo#)
+	</insert>
+
+	<delete id="delStation" parameterClass="Station">
+
+		delete from station where station_code=#station_code# and
+		station_type=#station_type#
+
+	</delete>
+
+	<delete id="delOperatorStation" parameterClass="Station">
+		delete from operator_station where station_code=#station_code#
+		and station_type=#station_type#
+	</delete>
+
+
+</sqlMap>

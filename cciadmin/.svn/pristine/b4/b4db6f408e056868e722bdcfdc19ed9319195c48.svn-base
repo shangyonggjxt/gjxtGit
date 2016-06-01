@@ -1,0 +1,87 @@
+package com.cci.pojo;
+
+public class Operator {
+
+	private int operator_id;
+	private String operator_name;
+	private String operator_code;
+	private String operator_pwd;
+	private String telephone;
+	private String address;
+	private String department;
+	private int del_flag;
+	private String comments;
+
+	public int getOperator_id() {
+		return operator_id;
+	}
+
+	public void setOperator_id(int operator_id) {
+		this.operator_id = operator_id;
+	}
+
+	public String getOperator_name() {
+		return operator_name;
+	}
+
+	public void setOperator_name(String operator_name) {
+		this.operator_name = operator_name;
+	}
+
+	public String getOperator_code() {
+		return operator_code;
+	}
+
+	public void setOperator_code(String operator_code) {
+		this.operator_code = operator_code;
+	}
+
+	public String getOperator_pwd() {
+		return operator_pwd;
+	}
+
+	public void setOperator_pwd(String operator_pwd) {
+		this.operator_pwd = operator_pwd;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public int getDel_flag() {
+		return del_flag;
+	}
+
+	public void setDel_flag(int del_flag) {
+		this.del_flag = del_flag;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+}

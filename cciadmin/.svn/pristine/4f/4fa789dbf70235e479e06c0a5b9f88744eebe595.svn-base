@@ -1,0 +1,69 @@
+package com.cci.pojo;
+
+public class Station {
+
+	private String station_name;
+	private String station_code;
+	private int station_type;
+	private int del_flag;
+	private String address;
+	private String department;
+	private String demo;
+
+	public String getStation_name() {
+		return station_name;
+	}
+
+	public void setStation_name(String station_name) {
+		this.station_name = station_name;
+	}
+
+	public String getStation_code() {
+		return station_code;
+	}
+
+	public void setStation_code(String station_code) {
+		this.station_code = station_code;
+	}
+
+	public int getStation_type() {
+		return station_type;
+	}
+
+	public void setStation_type(int station_type) {
+		this.station_type = station_type;
+	}
+
+	public int getDel_flag() {
+		return del_flag;
+	}
+
+	public void setDel_flag(int del_flag) {
+		this.del_flag = del_flag;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public String getDemo() {
+		return demo;
+	}
+
+	public void setDemo(String demo) {
+		this.demo = demo;
+	}
+
+}

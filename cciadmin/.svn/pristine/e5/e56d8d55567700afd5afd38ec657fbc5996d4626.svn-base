@@ -1,0 +1,26 @@
+package com.cci.dao.ibatis;
+
+import org.springframework.orm.ibatis.SqlMapClientTemplate;
+
+import com.cci.dao.OperatorGroupAssignDao;
+
+public class OperatorGroupAssignDaoIbatis implements OperatorGroupAssignDao {
+
+	private SqlMapClientTemplate sqlMapClientTemplate;
+
+	public SqlMapClientTemplate getSqlMapClientTemplate() {
+		return sqlMapClientTemplate;
+	}
+
+	public void setSqlMapClientTemplate(
+			SqlMapClientTemplate sqlMapClientTemplate) {
+		this.sqlMapClientTemplate = sqlMapClientTemplate;
+	}
+	
+	
+
+	public void delOperatorGroupAssign(int group_id) {
+		sqlMapClientTemplate.delete("delOperatorGroupAssign", group_id);
+	}
+
+}

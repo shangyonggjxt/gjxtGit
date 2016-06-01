@@ -1,0 +1,197 @@
+package com.cci.action;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.cci.dao.BaseStationDao;
+import com.cci.dao.StationDao;
+import com.cci.pojo.PageSize;
+import com.cci.pojo.Station;
+
+public class StationAction extends BaseAction {
+
+	private StationDao stationDao;
+	private BaseStationDao baseStationDao;
+	private Station station;
+
+	private String functionName;
+	private int pageSize = PageSize.pageSize;
+	private int currentPage = 1;
+	private int totalPage;
+	private int totalElements;
+
+	private List list;
+	private List baseStationList;
+
+	public String execute() throws Exception {
+
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpSession session = request.getSession();
+		Object userObject = session.getAttribute("sysmUser");
+
+		if (userObject == null) {
+			return this.ERROR;
+		}
+
+		session.setAttribute("location_href",
+				"station.action?functionName=query");
+
+		if (functionName != null && functionName.equals("view")) {
+			station = stationDao.queryStationByCode(station);
+			return "view";
+
+		}
+
+		if (functionName != null && functionName.equals("update_view")) {
+			station = stationDao.queryStationByCode(station);
+			return "update_view";
+		}
+
+		if (functionName != null && functionName.equals("update")) {
+			stationDao.updateStation(station);
+			return "operationSuc";
+		}
+
+		if (functionName != null && functionName.equals("delStation")) {
+
+			stationDao.delStation(station);
+
+			return "operationSuc";
+		}
+
+		if (functionName != null && functionName.equals("preSave")) {
+			baseStationList = baseStationDao.queryBaseStation();
+			return "preSave";
+		}
+
+		if (functionName != null && functionName.equals("save")) {
+
+			int num = stationDao.queryNumByStationCode(station);
+
+			if (num != 0) {
+				this.addFieldError("station", station.getStation_code()
+						+ ":基站代码已经存在了!!!");
+				baseStationList = baseStationDao.queryBaseStation();
+				return this.INPUT;
+			}
+
+			station.setDel_flag(0);
+			stationDao.insertStation(station);
+
+			return "operationSuc";
+
+		}
+
+		if (functionName != null && functionName.equals("query")) {
+
+			if (this.station == null) {
+				this.station = new Station();
+			}
+
+			String queryStr = "1=1";
+			StringBuilder stb = new StringBuilder(queryStr);
+
+			if (!(station.getStation_name() == null || station
+					.getStation_name().trim().equals(""))) {
+				stb.append(" and station_name  like  '%"
+						+ station.getStation_name().trim() + "%'");
+			}
+
+			list = stationDao.selectStation(pageSize, currentPage, stb
+					.toString());
+			this.currentPage = stationDao.getCurrentPage();
+			this.totalElements = stationDao.getTotalElements();
+			this.totalPage = stationDao.getTotalPage();
+
+			return "query";
+
+		}
+
+		return super.execute();
+	}
+
+	public String getFunctionName() {
+		return functionName;
+	}
+
+	public void setFunctionName(String functionName) {
+		this.functionName = functionName;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public int getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+
+	public int getTotalElements() {
+		return totalElements;
+	}
+
+	public void setTotalElements(int totalElements) {
+		this.totalElements = totalElements;
+	}
+
+	public List getList() {
+		return list;
+	}
+
+	public void setList(List list) {
+		this.list = list;
+	}
+
+	public StationDao getStationDao() {
+		return stationDao;
+	}
+
+	public void setStationDao(StationDao stationDao) {
+		this.stationDao = stationDao;
+	}
+
+	public Station getStation() {
+		return station;
+	}
+
+	public void setStation(Station station) {
+		this.station = station;
+	}
+
+	public BaseStationDao getBaseStationDao() {
+		return baseStationDao;
+	}
+
+	public void setBaseStationDao(BaseStationDao baseStationDao) {
+		this.baseStationDao = baseStationDao;
+	}
+
+	public List getBaseStationList() {
+		return baseStationList;
+	}
+
+	public void setBaseStationList(List baseStationList) {
+		this.baseStationList = baseStationList;
+	}
+
+}

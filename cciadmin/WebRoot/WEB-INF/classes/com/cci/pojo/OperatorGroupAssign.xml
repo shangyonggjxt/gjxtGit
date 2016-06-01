@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="OperatorGroupAssign">
+
+	<typeAlias alias="OperatorGroupAssign"
+		type="com.cci.pojo.OperatorGroupAssign" />
+
+	<delete id="delOperatorGroupAssign" parameterClass="int">
+		delete from operator_group_assign where group_id=#group_id#
+	</delete>
+
+	<insert id="insertOperatorGroupAssign"
+		parameterClass="OperatorGroupAssign">
+		insert into operator_group_assign(group_id,operator_id) values
+		(#group_id#,#operator_id#)
+	</insert>
+
+	<select id="queryOperatorGroupAssign"
+		parameterClass="OperatorGroupAssign"
+		resultClass="OperatorGroupAssign">
+		select group_id,operator_id from operator_group_assign where
+		group_id=#group_id# and operator_id=#operator_id#
+	</select>
+
+	<delete id="delOGAByOperatorID" parameterClass="int">
+		delete from operator_group_assign where
+		operator_id=#operator_id#
+	</delete>
+
+
+</sqlMap>

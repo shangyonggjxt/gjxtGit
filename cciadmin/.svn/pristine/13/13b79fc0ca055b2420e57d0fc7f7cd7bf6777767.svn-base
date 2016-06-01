@@ -1,0 +1,113 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<jsp:include page="/checklogin.jsp"></jsp:include>
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>控制器管理</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+ <base target="_self">
+  </head>
+  <font color="red"> <s:fielderror></s:fielderror> </font>
+  <body>
+  <form name="station" id="station" method="post" action="">
+    <table width="100%" border="1">
+      <tr>
+        <td colspan="4" align="center">控制器管理</td>
+      </tr>
+	        <tr>
+        <td width="25%" align="right">所属基站</td>
+        <td colspan="3">
+				<s:select list="%{baseStationList}" listKey="basestation_id" headerKey="0"
+							headerValue="所有" listValue="basestation_name" name="station.basestation_id"  id="station.basestation_id"
+							value="%{station.basestation_id}" theme="simple"></s:select>		</td>
+      </tr>
+      <tr>
+        <td width="25%" align="right">控制器名称</td>
+        <td width="25%">
+		<s:textfield name="station.station_name"
+								value="%{station.station_name}" id="station.station_name" theme="simple"></s:textfield>		</td>
+        <td width="25%" align="right">控制器代码</td>
+        <td width="25%">
+		 <s:textfield name="station.station_code"
+								value="%{station.station_code}" id="station.station_code" theme="simple"></s:textfield>		</td>
+      </tr>
+      <tr>
+        <td width="25%" align="right">类型</td>
+        <td width="25%">
+	    <s:select list="#{1:'TB810',2:'JRC',3:'MX800'}" name="station.station_type" value="%{station.station_type}" theme="simple"></s:select>		</td>
+        <td width="25%" align="right">IP</td>
+        <td width="25%">
+		<s:textfield name="station.IP"
+								value="%{station.IP}" id="station.IP" theme="simple"></s:textfield>		</td>
+      </tr>
+      <tr>
+        <td width="25%" align="right">备注</td>
+        <td colspan="3">
+			<s:textfield name="station.demo"
+								value="%{station.demo}" id="station.demo" theme="simple"></s:textfield>
+		</td>
+      </tr>
+      <tr>
+        <td colspan="4" align="center">
+          <input type="button" name="Submit" value="提交" onClick="savaData()">        </td>
+      </tr>
+    </table>
+  
+  </form>
+
+  </body>
+</html>
+
+
+
+<script type="text/javascript" language="javascript">
+
+
+function savaData(){
+
+
+ var basestation_id=document.getElementById("station.basestation_id").value;
+ if(basestation_id==""||parseInt(basestation_id)==0){
+  alert("请选择所属基站");
+  return;
+ }
+
+
+ var station_code=document.getElementById("station.station_code").value;
+ if(station_code==""){
+  alert("基站代码不能为空");
+  return;
+ }
+ 
+ 
+ 
+  var station_name=document.getElementById("station.station_name").value;
+ if(station_name==""){
+  alert("基站名称不能为空");
+  return;
+ }
+ 
+ 
+ var myDate = new Date();
+ var time=myDate.getMilliseconds();  
+ station.action=encodeURI("<%=request.getContextPath()%>/station.action?functionName=save&time="+time);
+ station.submit();
+ 
+}
+ 
+
+</script>

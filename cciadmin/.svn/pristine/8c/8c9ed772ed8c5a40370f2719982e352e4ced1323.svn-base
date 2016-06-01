@@ -1,0 +1,64 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+
+<jsp:include page="checklogin.jsp"></jsp:include>
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'leftFrame.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+
+	<link rel="stylesheet" type="text/css" href="js/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="js/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="js/demo.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="js/locale/easyui-lang-zh_CN.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+  </head>
+  
+  <body>
+
+	<div class="easyui-panel" title="目录列表" style="width:127px;padding:0px 0px 0px 0px">
+		<div>
+			<a href="operator.action?functionName=query" class="easyui-linkbutton" style="padding:0px;width:100%;" target="mainFrame">
+				<span style="font-size:14px;">监控平台账号</span>
+			</a>
+		</div>
+		
+		<div>
+			<a href="stationGroup.action?functionName=queryGroupFirst" class="easyui-linkbutton" style="padding:0px;width:100%;" target="mainFrame">
+				<span style="font-size:14px;">组织机构</span>
+			</a>
+		</div>
+		
+		<div>
+			<a href="baseStation.action?functionName=query" class="easyui-linkbutton" style="padding:0px;width:100%;" target="mainFrame">
+				<span style="font-size:14px;">基站</span>
+			</a>
+		</div>
+		
+		
+		<div>
+			<a href="station.action?functionName=query" class="easyui-linkbutton" style="padding:0px;width:100%;" target="mainFrame">
+				<span style="font-size:14px;">基站控制器</span>
+			</a>
+		</div>
+		
+		
+		
+	</div>
+
+  </body>
+</html>

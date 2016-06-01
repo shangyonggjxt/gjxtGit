@@ -1,0 +1,7 @@
+package com.cci.dao;
+
+public interface OperatorGroupAssignDao {
+
+	public void delOperatorGroupAssign(int group_id);
+
+}

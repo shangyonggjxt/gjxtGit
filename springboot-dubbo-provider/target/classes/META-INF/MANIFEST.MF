@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Built-By: shangyong
+Build-Jdk: 10.0.1
+Implementation-Title: springboot-dubbo-provider
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.cttic.service
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-URL: http://projects.spring.io/spring-boot/springboot-d
+ ubbo-provider/
+Created-By: Maven Integration for Eclipse
+
